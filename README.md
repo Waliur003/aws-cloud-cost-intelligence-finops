@@ -167,47 +167,8 @@ and dynamically displays:
 
 ## Architecture Diagram
 
-```text
-       +-------------------------------------------------------+
-       |             AWS Cloud (us-east-1)                     |
-       |                                                       |
-       |  +--------------------+                               |
-       |  |     AWS Budgets    |                               |
-       |  | (Threshold Alerts) |----+                          |
-       |  +--------------------+    |                          |
-       |                            v                          |
-       |                    +---------------+     Email/SMS    |
-       |                    |  Amazon SNS   |-----------------> (Subscribed Engineers)
-       |                    | (Alert Topic) |                  |
-       |                    +---------------+                  |
-       |                            ^                          |
-       |  +--------------------+    |                          |
-       |  | Amazon EventBridge |    |                          |
-       |  |   (Weekly Cron)    |    |                          |
-       |  +--------------------+    |                          |
-       |            |               |                          |
-       |            v               |                          |
-       |  +--------------------+    | (Cost Digest)            |
-       |  |     AWS Lambda     |----+                          |
-       |  |  (Python 3.12 CE)  |                               |
-       |  +--------------------+                               |
-       |       |          |                                    |
-       |       | Query    | Upload data.json                   |
-       |       v          v                                    |
-       |  +----------+  +-----------------------------------+  |
-       |  |   AWS    |  |             Amazon S3             |  |
-       |  |   Cost   |  |     Static Website Hosting        |  |
-       |  | Explorer |  |      - index.html                 |  |
-       |  +----------+  |      - data.json                  |  |
-       |                +-----------------------------------+  |
-       +----------------------------------|--------------------+
-                                          |
-                                          | Public HTTP Endpoint
-                                          v
-                               +------------------------+
-                               | Browser User Dashboard |
-                               +------------------------+
-```
+<img width="1370" height="893" alt="Architecture Diagram" src="https://github.com/user-attachments/assets/cf021b4d-2d10-4c21-83c4-440c67ef7c80" />
+
 
 ---
 
