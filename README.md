@@ -841,6 +841,7 @@ Displays the AWS Billing Preferences console confirming active **Free Tier alert
 
 This validates that account-level billing telemetry and Cost Explorer reporting are enabled before automated FinOps analytics are executed.
 
+<img width="1640" height="1371" alt="Screenshot 1" src="https://github.com/user-attachments/assets/1c5fea24-6577-464d-a308-fa687c1a560e" />
 
 
 ### 2. Amazon SNS Alerts Configuration within AWS Budgets
@@ -854,6 +855,9 @@ arn:aws:sns:us-east-1:418272769771:cost-alert-topic
 through the dedicated Amazon SNS Alerts configuration.
 
 This verifies that budget threshold events are connected directly to the centralized notification pipeline.
+
+<img width="1701" height="883" alt="Screenshot 2" src="https://github.com/user-attachments/assets/65c6c43b-929f-4c0e-aa45-b3d73359af56" />
+
 
 ### 3. S3 Bucket Public Access Block Configuration & Bucket Policy
 
@@ -872,6 +876,9 @@ s3:GetObject
 bucket policy has been applied.
 
 This verifies that the static website objects can be retrieved through the configured public S3 website endpoint.
+
+<img width="1253" height="748" alt="Screenshot 3" src="https://github.com/user-attachments/assets/1aa45ea5-013a-4a3e-92e8-398698cb111a" />
+
 
 ### 4. AWS Lambda Execution Test Returning HTTP 200 & Cost Breakdown
 
@@ -896,6 +903,9 @@ and the generated cost report showing:
 
 This validates Cost Explorer querying, aggregation logic, and successful serverless execution.
 
+<img width="1311" height="674" alt="Screenshot 4" src="https://github.com/user-attachments/assets/d88bc967-f980-434c-8023-40996f9341ab" />
+
+
 ### 5. Live S3 Static Dashboard Rendering Real-World AWS Expenditures
 
 Shows the browser-based cost dashboard hosted from the S3 static website endpoint.
@@ -916,6 +926,9 @@ alongside descending cost distribution across:
 - Amazon ECS
 
 This confirms the complete end-to-end workflow from Cost Explorer data ingestion through Lambda processing, S3 persistence, and browser visualization.
+
+<img width="1919" height="896" alt="Screenshot 5" src="https://github.com/user-attachments/assets/0fab98c2-3fab-4197-8af4-71cef948b3a6" />
+
 
 ---
 
