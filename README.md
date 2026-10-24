@@ -1,6 +1,4 @@
-# Cloud Engineering Project 11: Automated Cloud Cost Intelligence & FinOps Alerting System
-
-## Serverless Billing Analytics, Proactive Budgets & S3 Static Dashboard
+# Cloud Engineering Project 11: Automated Cloud Cost Intelligence & FinOps Alerting System (Serverless Billing Analytics, Proactive Budgets & S3 Static Dashboard)
 
 ---
 
