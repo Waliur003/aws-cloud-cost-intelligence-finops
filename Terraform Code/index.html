@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Cloud Cost Dashboard</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; padding: 2rem; margin: 0; }
+    .card { background: #1e293b; border-radius: 12px; padding: 2rem; max-width: 650px; margin: 2rem auto; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5); border: 1px solid #334155; }
+    h1 { margin-top: 0; font-size: 1.6rem; color: #f1f5f9; }
+    .date-badge { display: inline-block; background: #334155; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem; }
+    .total-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600; }
+    .total { font-size: 2.75rem; font-weight: 800; color: #38bdf8; margin: 0.25rem 0 1.5rem 0; }
+    .breakdown-title { font-size: 1rem; font-weight: 600; border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 0.75rem; }
+    .service-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #1e293b; font-size: 0.95rem; }
+    .service-row span:last-child { font-weight: 600; color: #cbd5e1; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>AWS Cost & Usage Summary</h1>
+    <div id="dateRange" class="date-badge">Loading dates...</div>
+    <div class="total-title">Total 7-Day Spend</div>
+    <div class="total" id="totalCost">$0.00</div>
+    <div class="breakdown-title">Top Active Services</div>
+    <div id="breakdown">Loading services...</div>
+  </div>
+
+  <script>
+    fetch('data.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Data file not found');
+        return res.json();
+      })
+      .then(data => {
+        document.getElementById('dateRange').textContent = `${data.startDate} to ${data.endDate}`;
+        document.getElementById('totalCost').textContent = `$${data.totalCost.toFixed(2)}`;
+        const list = document.getElementById('breakdown');
+        list.innerHTML = '';
+        const items = Object.entries(data.breakdown).sort((a, b) => b[1] - a[1]);
+        if (items.length === 0) {
+          list.innerHTML = '<div style="color: #94a3b8;">No billable charges recorded for this period.</div>';
+          return;
+        }
+        for (const [service, cost] of items) {
+          list.innerHTML += `
+            <div class="service-row">
+              <span>${service}</span>
+              <span>$${cost.toFixed(2)}</span>
+            </div>
+          `;
+        }
+      })
+      .catch(() => {
+        document.getElementById('breakdown').innerHTML = '<div style="color: #f87171;">data.json not found yet. Run the Lambda function to generate data.</div>';
+      });
+  </script>
+</body>
+</html>
